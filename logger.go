@@ -118,27 +118,27 @@ func (ll *logrusLogger) Panic(items ...interface{}) {
 }
 
 func (ll *logrusLogger) Debugf(format string, args ...interface{}) {
-	ll.l.Debugf(format, args)
+	ll.l.Debugf(format, args...)
 }
 
 func (ll *logrusLogger) Infof(format string, args ...interface{}) {
-	ll.l.Infof(format, args)
+	ll.l.Infof(format, args...)
 }
 
 func (ll *logrusLogger) Warnf(format string, args ...interface{}) {
-	ll.l.Warnf(format, args)
+	ll.l.Warnf(format, args...)
 }
 
 func (ll *logrusLogger) Errorf(format string, args ...interface{}) {
-	ll.l.Errorf(format, args)
+	ll.l.Errorf(format, args...)
 }
 
 func (ll *logrusLogger) Fatalf(format string, args ...interface{}) {
-	ll.l.Fatalf(format, args)
+	ll.l.Fatalf(format, args...)
 }
 
 func (ll *logrusLogger) Panicf(format string, args ...interface{}) {
-	ll.l.Panicf(format, args)
+	ll.l.Panicf(format, args...)
 }
 
 func (ll *logrusLogger) WithField(key string, value interface{}) Logger {
