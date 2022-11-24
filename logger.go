@@ -33,6 +33,13 @@ type Logger interface {
 	Fatal(items ...interface{})
 	Panic(items ...interface{})
 
+	Debugf(format string, args ...interface{})
+	Infof(format string, args ...interface{})
+	Warnf(format string, args ...interface{})
+	Errorf(format string, args ...interface{})
+	Fatalf(format string, args ...interface{})
+	Panicf(format string, args ...interface{})
+
 	WithField(string, interface{}) Logger
 
 	// Writer Logger can be transformed into an io.Writer.
@@ -110,6 +117,30 @@ func (ll *logrusLogger) Panic(items ...interface{}) {
 	ll.l.Panic(items...)
 }
 
+func (ll *logrusLogger) Debugf(format string, args ...interface{}) {
+	ll.l.Debugf(format, args)
+}
+
+func (ll *logrusLogger) Infof(format string, args ...interface{}) {
+	ll.l.Infof(format, args)
+}
+
+func (ll *logrusLogger) Warnf(format string, args ...interface{}) {
+	ll.l.Warnf(format, args)
+}
+
+func (ll *logrusLogger) Errorf(format string, args ...interface{}) {
+	ll.l.Errorf(format, args)
+}
+
+func (ll *logrusLogger) Fatalf(format string, args ...interface{}) {
+	ll.l.Fatalf(format, args)
+}
+
+func (ll *logrusLogger) Panicf(format string, args ...interface{}) {
+	ll.l.Panicf(format, args)
+}
+
 func (ll *logrusLogger) WithField(key string, value interface{}) Logger {
 	return &logrusLogger{ll.l.WithField(key, value)}
 }
@@ -132,6 +163,7 @@ func New(l Level) Logger {
 	}
 }
 
+// NewJS return json log formatter.
 func NewJS(l Level) Logger {
 	logger := &logrus.Logger{
 		Out:       os.Stderr,
@@ -145,7 +177,7 @@ func NewJS(l Level) Logger {
 	}
 }
 
-// NewDefault return default zac log.
+// NewDefault return default json formatter.
 func NewDefault() Logger {
 	logger := &logrus.Logger{
 		Out:       os.Stderr,
