@@ -41,6 +41,7 @@ type Logger interface {
 	Panicf(format string, args ...interface{})
 
 	WithField(string, interface{}) Logger
+	SetLevel(level Level)
 
 	// Writer Logger can be transformed into an io.Writer.
 	// That writer is the end of an io.Pipe and it is your responsibility to close it.
@@ -143,6 +144,10 @@ func (ll *logrusLogger) Panicf(format string, args ...interface{}) {
 
 func (ll *logrusLogger) WithField(key string, value interface{}) Logger {
 	return &logrusLogger{ll.l.WithField(key, value)}
+}
+
+func (ll *logrusLogger) SetLevel(level Level) {
+	ll.l.Logger.SetLevel(logrus.Level(level))
 }
 
 func (ll *logrusLogger) Writer() *io.PipeWriter {
